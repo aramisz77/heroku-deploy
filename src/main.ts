@@ -1,13 +1,13 @@
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import { AppModule } from './app.module';
+import { AppModule } from './app/app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const config = new DocumentBuilder()
     .setTitle('Heroku Deploy')
     .setDescription('API description')
-    .setVersion('1.0')
+    .setVersion(process.env.npm_package_version)
     .addTag('API')
     .build();
   const document = SwaggerModule.createDocument(app, config);
